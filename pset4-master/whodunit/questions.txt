@@ -1,0 +1,64 @@
+0.  BMP: 32 bit color, or over 4 billion
+	GIF: 8 bits, 256 colors
+	JPEG: 24 bit, 16 million
+	PNG: 24 bit, 16 million
+	
+1.  GIF
+
+2.  With loseless compression, when uncompressing a file, all the bits that the file contains in its original state can be 
+    completely restored without any lose of data.
+    
+    With lossy compression, when the file is uncompressed, a part (some bits) of the original information is lost (or deleted).
+    
+3.  JPEG
+
+4.  When a file is deleted on a FAT file system the system erases the file's FAT files, but the actual file remains in the hard 
+    drive.
+    
+5.  In order to ensure that the deleted files cannot be recovered, the disk where the files are stored must be sanetized by 
+    filling every addressable block of the disk with zeroes (ASCII NUL bytes).
+    
+6.  stdint.h is a header file in the C standar library that defines sets of integral type aliases with specific width requirements,
+    along with corresponding sets of macros. It also defines macro functions that specify limits of integer types to create values 
+    of these types in other header files.
+    
+7.  Using these types we clarify that we want to use unsigned or signed integers (depending on the existence of the character u)
+    that have a specific amount of bits, regardless of what the type with as much bits is on the system.
+    
+8.  Assuming that we work on a 32-bit system the following applies:
+    BYTE is 1 byte
+    DWORD is 4 bytes
+    LONG is 4 bytes
+    WORD is 2 bytes
+    
+9.  The first two bytes of any BMP file must be a WORD which in ASCII encoding  the characters BM (0x42 0x4D in hexadecimal). This 
+    WORD denotes the bfType, which specifies the file type.
+    
+10. bfSize specifies the size, in bytes, of the bitmap file
+    biSize specifies the number of bytes required by the structure.
+    
+11. If biHeight is negative the bitmap is a top-down DIB and its origin is the upper-left corner.
+
+12. The biBitCount member of the BITMAPINFOHEADER structure determines the number of bits that define each pixel (i.e. color depth) 
+    and the maximum number of colors in the bitmap.
+    
+13. fopen might return NULL in case that the file that we are trying to create cannot be created or because we do not have the right 
+    permissions in order to create this file.
+    
+14. The third argument in fread indicates how many units of sizeof() data must be read from the function. In this case, the data 
+    that is read is the BITMAPFILEHEADER, which is a structure, so in order to read all the data types that are included in 
+    BITMAPFILEHEADER the function must read this structure only once, as shown by the third argument in each case the fread function 
+    is called.
+    
+15. bi.biWidth defines the width of the bitmap (scanline), in pixels. In every case, the bytes in a scanline must be multiple of 4, 
+    so padding is needed in the case that bi.biWidth is 3 because 3 (pixels of bi.biWidth) * 3 (bytes per pixel) = 9 bytes.
+    By doing the math padding must be 3 [4 - (3 * 3) % 4) % 4 = 3].
+    
+16. The fseek function sets the file position indicator of the pointer (stream) to a specific place in the file, as is indicated by 
+    the offset.
+    
+17. If whence, the position from which the file position indicator will be moved depending on the value of the offset, is set to
+    SEEK_CUR then the offset is added from the current position of the file pointer (the offset is relative to the start of the 
+    file).
+    
+18. Rick Astley

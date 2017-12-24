@@ -1,0 +1,11 @@
+questions.txt
+
+Computer Science 50
+Problem Set 3
+
+0. The framework allows the board's dimensions to be from 3x3 up to 9x9. 
+1. The game's board is represented with integers.
+2. To greet the player when the game starts we use a function, named greet,that 
+is declared and implemented within the program.
+3. The functions that need to be implemented are the init, draw, move and won 
+functions. 
