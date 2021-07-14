@@ -1,0 +1,21 @@
+nav {
+  overflow: hidden;
+  height: 10vh;
+}
+
+nav div {
+  float: right;
+  margin-top: 1em;
+  margin-right: 1em;
+}
+
+nav div a {
+  padding: 0 1em;
+  color: #5F6368;
+  font-size: 13px;
+}
+
+nav div a:hover {
+  color: #5f6368d2;
+}
+/*# sourceMappingURL=nav.css.map */

@@ -1,0 +1,23 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+    <h1>My Watchlist</h1>
+    <div class="watchlist-section">
+        <ul>
+            {% for item in watchlist %}
+                <li class="watchlist-item">
+                    <a href="{% url 'auctions:listing' item.id %}">
+                        <div class="watchlist-item__box" style="border: 1px solid black;">
+                            <div class="title">Title: {{ item.title }}</div>
+                            <div class="description">Description: {{ item.description }}</div>
+                            <div class="current_price">Current price: {{ item.current_price }}</div>
+                        </div>
+                    </a>
+                </li>
+            {% empty %}
+            No items have been added yet in your watchlist.
+            {% endfor %}
+        </ul>
+        
+    </div>
+{% endblock %}

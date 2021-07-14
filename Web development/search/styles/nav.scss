@@ -1,0 +1,19 @@
+nav {
+    overflow: hidden;
+    height: 10vh;
+    
+    div {
+        float: right;
+        margin-top: 1em;
+        margin-right: 1em;
+        a {
+            padding: 0 1em;
+            color:#5F6368;
+            font-size: 13px;
+        }
+        
+        a:hover {
+            color: #5f6368d2;
+        }
+    }
+}

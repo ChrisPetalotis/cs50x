@@ -1,0 +1,25 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+    <h1>Active listings with the '{{ category.name }}' category</h1>
+
+    <div class="listings-section">
+        <ul>
+            {% for listing in listings %}
+                {% if listing.status %}
+                    <li class="listing-item">
+                        <a href="{% url 'auctions:listing' listing.id %}">
+                            <div class="watchlist-item__box" style="border: 1px solid black;">
+                                <div class="title">Title: {{ listing.title }}</div>
+                                <div class="description">Description: {{ listing.description }}</div>
+                                <div class="current_price">Current price: {{ listing.current_price }}</div>
+                            </div>
+                        </a>
+                    </li>
+                {% endif %}
+            {% empty %}
+            No listings have been tagged with this category.
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

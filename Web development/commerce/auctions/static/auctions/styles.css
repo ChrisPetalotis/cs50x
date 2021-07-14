@@ -1,0 +1,40 @@
+body {
+    padding: 40px;
+}
+
+.listing {
+    display: flex;
+    margin: 20px 0;
+}
+
+.listing img {
+    width: 50%;
+}
+
+input[value="Watchlist"] {
+    padding: 2px 4  px;
+    background-color: darkslategray;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 5px;
+    border: 0;
+    font-size: 14px;
+}
+
+input[value="Remove from watchlist X"] {
+    padding: 2px 4  px;
+    background-color: darkslategray;
+    font-weight: 600;
+    color: red;
+    border-radius: 5px;
+    border: 0;
+    font-size: 14px;
+}
+
+input[value="Place Bid"] {
+    background-color: cornflowerblue;
+    border: 0;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+}

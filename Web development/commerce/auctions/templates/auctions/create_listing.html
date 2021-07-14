@@ -1,0 +1,34 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+    <form action="{% url 'auctions:create_listing' %}" method="post" style="display: flex; flex-direction: column; width: clamp(200px, 50%, 600px); margin: 0 auto;">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" placeholder="Title" required>
+        
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" cols="30" rows="10" required></textarea>
+        
+        <label for="starting_bid">Starting bid:</label>
+        <input type="number" name="starting_bid" id="starting_bid" placeholder="Starting bid (in €)" required>
+
+        <h3>Optional fields</h3>
+        <label for="image_path">URL/Path to an image:</label>
+        <input type="url" name="image_path" id="image_path" placeholder="URL/Path to iamge">
+        
+        <!-- <label for="category">Choose a category:</label>
+        {% if not categories %}
+            No categories available.
+        {% else %}
+            <input list="listing_categories" id="category" name="category" placeholder="Choose a listing category">
+            <datalist id="listing_categories">
+                {% for category in categories %}
+                    <option value="{{ category.name }}">{{ category.name }}</option>
+                {% endfor %}
+            </datalist>
+        {% endif %} -->
+
+        <input type="text" name="category" placeholder="Category">
+        <input type="submit" style="margin-top: 15px;" value="Create">
+    </form>
+{% endblock %}

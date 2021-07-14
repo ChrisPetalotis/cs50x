@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Advanced Search</title>
+        <link rel="stylesheet" href="styles/nav.css">
+        <link rel="stylesheet" href="styles/adv_search.css">
+
+        <!-- Imports -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <nav>
+            <div class="links">
+                <a href="index.html">Google</a>
+            </div>
+        </nav>
+        <h2 style="color: #d93025; font-weight: 500; margin: 0 35px 25px 35px; ">Advanced Search</h2>
+        <hr style="border-bottom: 1px solid #ebebeb">
+        <main>
+            <form action="https://google.com/images">
+
+                <fieldset>
+                    <p>Find pages with...</p>
+
+                    <div>
+                        <label for="all">all these words:</label>
+                        <span><input type="text" id="all" name="as_q"></span>
+                    </div>
+                    <div>
+                        <label for="exact">the exact word or phrase:</label>
+                        <span><input type="text" id="exact" name="as_epq"></span>
+                    </div>
+                    <div>
+                        <label for="any">any of these words:</label>
+                        <span><input type="text" id="any" name="as_oq"></span>
+                    </div>
+                    <div>
+                        <label for="none">none of these words:</label>
+                        <input type="text" id="none" name="as_eq">
+                    </div>
+                </fieldset>
+                
+                <!-- <input type="text" name="q" placeholder="Search for images..."> -->
+                <input type="submit" value="Advanced Search">
+            </form>
+        </main>  
+    </body>
+</html>

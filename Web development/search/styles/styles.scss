@@ -1,0 +1,71 @@
+body {
+    font-family: 'Roboto', "Times New Roman", Times, serif;
+}
+
+main {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    form {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 18em;
+
+        img {
+            width: 50%;
+            margin-bottom: 1em;
+        }
+
+        #search_box {
+            .fa {
+                position: absolute;
+                margin-left: 1em;
+                margin-top: 1.8em;
+                color: #9aa0a6cb;
+                font-size: 1.2;
+            }
+        }
+
+        input {
+            margin: 1em 0;
+        }
+
+        input[type="text"] {
+            font-family: arial,sans-serif;
+            outline: 0;
+            border: 1px solid #9aa0a675;
+            width: 37em;
+            height: 2em;
+            height: 3em;
+            border-radius: 24px;
+            font-size: 14px;
+            padding-left: 5px 8px 0 16px;
+            color: rgba(0, 0, 0, .87);
+        }
+
+        input[type="submit"] {
+            background-color:#f2f2f2;
+            padding: 0 16px;
+            color:#5F6368;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #f2f2f2;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            line-height: 27px;
+            height: 36px;
+            margin: 11px 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #f8f8f8;
+            border: 1px solid black;
+            color: black;
+            background-color:#e6e4e4a3;
+        }
+    }
+}
