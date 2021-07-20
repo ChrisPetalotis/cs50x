@@ -51,3 +51,7 @@ a:hover {
     color: #494949;
     font-size: 13px;
 }
+
+.hide_archive {
+    display: none;
+}
