@@ -1,0 +1,138 @@
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Use buttons to toggle between views
+  document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
+  document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
+  document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
+  document.querySelector('#compose').addEventListener('click', compose_email);
+
+  document.querySelector('input[type="submit"]').onclick = (e) => send_email(e);
+
+  // By default, load the inbox
+  load_mailbox('inbox');
+});
+
+function send_email(e) {
+  e.preventDefault();
+  document.querySelector('#error-message').innerHTML = '';
+
+  const recipients = document.querySelector('#compose-recipients').value;
+  const subject = document.querySelector('#compose-subject').value;
+  const body = document.querySelector('#compose-body').value;
+  
+  // Send POST request to emails API
+  fetch('/emails', {
+    method: 'POST',
+    body: JSON.stringify({
+      recipients,
+      subject,
+      body
+    })
+  })
+  .then(response => response.json())
+  .then(result =>  {
+    if (result.error) {
+      document.querySelector('#error-message').innerHTML = result.error;
+      return;
+    }
+
+    // Once the email has been sent, load the user's sent mailbox
+    load_mailbox('sent');
+  });
+}
+
+function compose_email() {
+
+  // Show compose view and hide other views
+  document.querySelector('#emails-view').style.display = 'none';
+  document.querySelector('#single-email-view').style.display = 'none';
+  document.querySelector('#compose-view').style.display = 'block';
+
+  // Clear out composition fields
+  document.querySelector('#compose-recipients').value = '';
+  document.querySelector('#compose-subject').value = '';
+  document.querySelector('#compose-body').value = '';
+
+  document.querySelector('#error-message').innerHTML = '';
+}
+
+function load_mailbox(mailbox) {
+  
+  // Show the mailbox and hide other views
+  document.querySelector('#emails-view').style.display = 'block';
+  document.querySelector('#compose-view').style.display = 'none';
+  document.querySelector('#single-email-view').style.display = 'none';
+
+  // Show the mailbox name
+  document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
+
+  // Query emails from API
+  fetch(`/emails/${mailbox}`)
+    .then(response => response.json())
+    .then(emails => {
+      console.log(emails);
+      
+      for (let email of emails) {
+        const div = document.createElement('div');
+        div.classList.add('email-entry');
+        div.innerHTML = `
+            <div class="email-contents">
+              <div class="email-sender">from: ${email.sender}</div>
+              <div class="email-subject">${email.subject}</div>
+              <div class="email-timestamp">${email.timestamp}</div>
+            </div>
+        `;
+
+        div.onclick = () => {
+          // Mark email as read, if not already marked so
+          if (!email.read) {
+            fetch(`/emails/${email.id}`, {
+              method: 'PUT',
+              body: JSON.stringify({
+                read: true
+              })
+            });
+          }
+
+          // Show email's contents
+          load_mail_page(email.id);
+        }
+        document.querySelector('#emails-view').append(div);
+
+        if (email.read) {
+          div.style.backgroundColor = '	#D3D3D3';
+        } else {
+          div.style.backgroundColor = 'white';
+        }
+      }
+    })
+}
+
+function load_mail_page(email_id) {
+
+  // Show the single email view and hide other views
+  document.querySelector('#emails-view').style.display = 'none';
+  document.querySelector('#compose-view').style.display = 'none';
+  document.querySelector('#single-email-view').style.display = 'block';
+  document.querySelector('#single-email-view').innerHTML = '';
+
+  fetch(`emails/${email_id}`)
+    .then(response => response.json())
+    .then(email => {
+      const div = document.createElement('div');
+      // div.classList.add('email-header');
+      div.innerHTML = `
+        <div class="email-header">
+          <div class="people">
+            <div class="sender">from: ${email.sender}</div>
+            <div class="recipients">To: ${email.recipients.toString()}</div>
+          </div>
+          <div class="subject">${email.subject}</div>
+          <div class="timestamp">${email.timestamp}</div>
+          </div>
+          <div class="body">${email.body}</div>
+      `;
+      document.querySelector('#single-email-view').append(div);
+    });
+  
+}
