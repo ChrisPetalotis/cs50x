@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
-  document.querySelector('#compose').addEventListener('click', compose_email);
+  document.querySelector('#compose').onclick = () => compose_email();
 
   document.querySelector('input[type="submit"]').onclick = (e) => send_email(e);
 
@@ -29,8 +29,9 @@ function send_email(e) {
       body
     })
   })
-  .then(response => response.json())
+  .then(response => {console.log('response', response); response.json() })
   .then(result =>  {
+  console.log('🚀 ~ file: inbox.js ~ line 34 ~ result', result);
     if (result.error) {
       document.querySelector('#error-message').innerHTML = result.error;
       return;
@@ -41,7 +42,7 @@ function send_email(e) {
   });
 }
 
-function compose_email(email=null) {
+function compose_email(email=undefined) {
 
   // Show compose view and hide other views
   document.querySelector('#emails-view').style.display = 'none';
@@ -51,7 +52,7 @@ function compose_email(email=null) {
   if (email) {
     document.querySelector('#compose-recipients').value = email.sender;
     document.querySelector('#compose-subject').value = email.subject.includes("Re: ") ? email.subject : `Re: ${email.subject}`;
-    document.querySelector('#compose-body').value = `On ${email.timestamp} ${email.sender} wrote:\n\n` + email.body;
+    document.querySelector('#compose-body').value = `On ${email.timestamp} ${email.sender} wrote:\n\n + ${email.body}`;
   } else {
     // Clear out composition fields
     document.querySelector('#compose-recipients').value = '';
@@ -76,6 +77,7 @@ function load_mailbox(mailbox) {
   fetch(`/emails/${mailbox}`)
     .then(response => response.json())
     .then(emails => {
+    console.log('🚀 ~ file: inbox.js ~ line 81 ~ emails', emails);
       for (let email of emails) {
         const div = document.createElement('div');
         div.classList.add('email-entry');
